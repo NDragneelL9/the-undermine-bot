@@ -18,14 +18,14 @@
 - [Architecture 🖼️](#Architecture)
   - [Static View](https://github.com/NDragneelL9/the-undermine-bot/blob/main/documentation/StaticView.md)
   - [Dynamic View](https://github.com/NDragneelL9/the-undermine-bot/blob/main/documentation/DynamicView.md)
-- [Technical Stack ⚙️](#technical-stack-⚙️)
+- [Technical Stack](#technical-stack)
 - [Getting started](#getting-started)
 - [Contributing](#contributing)
 
 # What is the goal of this project?
 **The Undermine Bot** was inspired by [THE UNDERMINE JOURNAL](https://theunderminejournal.com) and is supposed to help WoW players with getting live updates on the market.
 
-# Technical Stack ⚙️
+# Technical Stack
 The project consists of two main parts: **[Telegram bot](https://core.telegram.org/bots)** as User interface and **[Ruby on Rails](https://rubyonrails.org/)** as back-end service ([PostreSQL](https://www.postgresql.org/) as main database)
 
 # Getting started
