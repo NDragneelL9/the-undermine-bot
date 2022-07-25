@@ -1,1 +1,1 @@
-![DBSchema](images/TheUndermineBotDBv1.0.0.png)
+![DBSchema](images/TheUndermineBotDBv1.0.1.png)
