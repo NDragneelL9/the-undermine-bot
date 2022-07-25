@@ -1,0 +1,4 @@
+## Functional requirements (Backlog) 📃
+| Epics     | Features    | Functionality  |
+| :------------: |:-------------:| :-----:| 
+| As a user, I want to see list of available bot commands, so that I can choose a command to perform |  As a user, I want to choose a game region which market updates I would like to see  <br> As a user, I want to choose a game server which auction house I would like to browse <br> As a user, I want to get current WoW token price in my game region | As a user, I want to click custom keyboard button in order to choose a game region <br> As a user, I want to enter full name of a game server to get live auction house state <br> As a user, I want to run a command to get current WoW token price in selected game region
