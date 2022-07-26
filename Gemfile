@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -37,7 +39,13 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'faker', '~> 2.21'
+  gem 'lefthook', '~> 1.0', '>= 1.0.5'
   gem 'rspec-rails', '~> 6.0.0.rc1'
+  gem 'rubocop', '~> 1.32'
+  gem 'rubocop-performance', '~> 1.14', '>= 1.14.3'
+  gem 'rubocop-rails', '~> 2.15', '>= 2.15.2'
+  gem 'rubocop-rspec', '~> 2.12', '>= 2.12.1'
+  gem 'solargraph', '~> 0.45.0'
 end
 
 group :development do
