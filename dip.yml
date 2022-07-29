@@ -7,7 +7,7 @@ environment:
 
 compose:
   files:
-    - .docker/compose.yml
+    - compose.yml
   project_name: the-undermine-bot
 
 interaction:
