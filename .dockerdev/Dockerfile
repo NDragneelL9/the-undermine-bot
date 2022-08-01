@@ -1,13 +1,15 @@
 ARG RUBY_VERSION
 
-FROM ruby:$RUBY_VERSION AS base
+FROM ruby:$RUBY_VERSION
 
+ARG PG_MAJOR
 # Common dependencies
-RUN apt-get update -qq \
+RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+  && echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list \
+  && apt-get update -qq \
   && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   build-essential \
   gnupg2 \
-  curl \
   less \
   git \
   libcurl4-openssl-dev \
@@ -15,23 +17,8 @@ RUN apt-get update -qq \
   wget \
   zip \
   zlib1g-dev \
-  && apt-get clean \
-  && rm -rf /var/cache/apt/archives/* \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-  && truncate -s 0 /var/log/*log
-
-# Install PostgreSQL dependencies
-ARG PG_MAJOR
-RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
-  gpg --dearmor -o /usr/share/keyrings/postgres-archive-keyring.gpg \
-  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/postgres-archive-keyring.gpg] https://apt.postgresql.org/pub/repos/apt/" \
-  $DISTRO_NAME-pgdg main $PG_MAJOR | tee /etc/apt/sources.list.d/postgres.list > /dev/null
-RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-  libpq-dev \
   postgresql-client-$PG_MAJOR \
   && apt-get clean \
-  && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && truncate -s 0 /var/log/*log
 
@@ -108,11 +95,6 @@ RUN mkdir $BUNDLE_PATH \
 # Copy code
 COPY --chown=my_user:my_user . .
 
-# Precompile assets
-# NOTE: The command may require adding some environment variables (e.g., SECRET_KEY_BASE) if you're not using
-# credentials.
-RUN bundle exec rails assets:precompile
-
 # Finally, our production image definition
 # NOTE: It's not extending the base image, it's a new one
 FROM ruby:$RUBY_VERSION AS production
@@ -164,4 +146,4 @@ COPY --from=production-builder $BUNDLE_PATH $BUNDLE_PATH
 # 2) We can even copy the Bootsnap cache to speed up our Rails server load!
 COPY --chown=my_user:my_user --from=production-builder /home/my_user/app/tmp/cache/bootsnap* /home/my_user/app/tmp/cache/
 
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "telegram:bot:poller"]

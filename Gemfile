@@ -38,6 +38,15 @@ gem 'bootsnap', require: false
 # Use dip as Development-environment CLI program providing the native-like interaction with a Dockerized application
 gem 'dip', '~> 7.3', '>= 7.3.1'
 
+# Special battle net gem to get access to Blizzard API
+gem 'omniauth-bnet', '~> 2.0'
+
+# Http client to send requests to API
+gem 'rest-client', '~> 2.1.0'
+
+# Provides tools for developing telegram bots
+gem 'telegram-bot', '~> 0.15.6'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'brakeman', '~> 5.2', '>= 5.2.3'

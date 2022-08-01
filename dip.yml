@@ -7,7 +7,7 @@ environment:
 
 compose:
   files:
-    - compose.yml
+    - .dockerdev/compose.yml
   project_name: the-undermine-bot
 
 interaction:
@@ -30,7 +30,7 @@ interaction:
     service: runner
     command: bundle exec rake
 
-  "bot:poller":
+  bot:
     description: Run Telegram bot poller
     service: rails
     command: bundle exec rails telegram:bot:poller
@@ -71,3 +71,4 @@ provision:
   - dip compose down --volumes || true
   - dip compose up -d postgres
   - dip bash -c bin/setup
+  - dip compose up -d bot

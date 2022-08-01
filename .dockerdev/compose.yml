@@ -4,7 +4,7 @@ x-app:
     context: .
     args:
       RUBY_VERSION: '3.0.3'
-      PG_MAJOR: '14'
+      PG_MAJOR: '12'
   image: the-undermine-bot:1.0.0
   environment:
     &env
@@ -39,8 +39,8 @@ x-backend:
     &backend_depends_on
     postgres:
       condition: service_healthy
-    redis:
-      condition: service_healthy
+    # redis:
+    #   condition: service_healthy
 
 services:
   rails:
@@ -59,7 +59,7 @@ services:
       #   command: bundle exec sidekiq -C config/sidekiq.yml
 
   postgres:
-    image: postgres:14
+    image: postgres:12
     volumes:
       - .psqlrc:/root/.psqlrc:ro
       - postgres:/var/lib/postgresql/data
