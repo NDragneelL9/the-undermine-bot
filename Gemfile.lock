@@ -327,6 +327,7 @@ DEPENDENCIES
   rubocop-rspec (~> 2.12, >= 2.12.1)
   ruby_audit (~> 2.1)
   simplecov (~> 0.21.2)
+  simplecov_json_formatter (~> 0.1.4)
   solargraph (~> 0.45.0)
   telegram-bot (~> 0.15.6)
   tzinfo-data

@@ -29,7 +29,8 @@
 /config/master.key
 /config/credentials/development.key
 /config/credentials/production.key
+/config/credentials/test.key
 
 # Ignore test coverage page
 /coverage
-/config/credentials/test.key
+# !/coverage/coverage.json
