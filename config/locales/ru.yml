@@ -1,0 +1,4 @@
+ru:
+  telegram_webhooks:
+    start:
+      hello: "Привет мир!"

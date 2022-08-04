@@ -1,16 +1,18 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.3"
+ruby '3.0.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.3", ">= 7.0.3.1"
+gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem 'puma', '~> 5.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -22,20 +24,42 @@ gem "puma", "~> 5.0"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem "rack-cors"
+# gem "rack-cors
+
+# Use dip as Development-environment CLI program providing the native-like interaction with a Dockerized application
+gem 'dip', '~> 7.3', '>= 7.3.1'
+
+# Special battle net gem to get access to Blizzard API
+gem 'omniauth-bnet', '~> 2.0'
+
+# Http client to send requests to API
+gem 'rest-client', '~> 2.1.0'
+
+# Provides tools for developing telegram bots
+gem 'telegram-bot', '~> 0.15.6'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'brakeman', '~> 5.2', '>= 5.2.3'
+  gem 'bundler-audit', '~> 0.9.1'
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'lefthook', '~> 1.0', '>= 1.0.5'
+  gem 'rspec-rails', '~> 6.0.0.rc1'
+  gem 'rubocop', '~> 1.32'
+  gem 'rubocop-performance', '~> 1.14', '>= 1.14.3'
+  gem 'rubocop-rails', '~> 2.15', '>= 2.15.2'
+  gem 'rubocop-rspec', '~> 2.12', '>= 2.12.1'
+  gem 'ruby_audit', '~> 2.1'
+  gem 'solargraph', '~> 0.45.0'
 end
 
 group :development do
@@ -43,3 +67,9 @@ group :development do
   # gem "spring"
 end
 
+group :test do
+  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
+  gem 'faker', '~> 2.21'
+  gem 'simplecov', '~> 0.21.2'
+  gem 'simplecov_json_formatter', '~> 0.1.4'
+end

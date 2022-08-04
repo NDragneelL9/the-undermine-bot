@@ -1,0 +1,85 @@
+name: "TUB-CI/CD"
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main", "develop"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_DB: the_undermine_bot_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/the_undermine_bot_test"
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_TEST }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1.113.2
+        with:
+          ruby-version: 3.0.3
+          bundler-cache: true
+
+      - name: Set up database schema
+        run: bundle exec rails db:schema:load
+
+      - name: Run tests
+        run: bundle exec rspec
+
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
+          debug: true
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1.113.2
+        with:
+          bundler-cache: true
+      # Add or replace any other lints here
+      # --ignore CVE-2015-9284 because bnet-omniauth hardly depends on onmniauth 1v which has vulnerability
+      - name: Security audit dependencies
+        run: bundle exec bundle audit --update --ignore CVE-2015-9284
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2
+      - name: Lint Ruby files
+        run: bundle exec rubocop --parallel
+
+  deploy:
+    if: ${{ github.even_name == 'push' && github.fer == 'refs/heads/main' }}
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Deploy to heroku using Docker container
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "the-undermine-bot"
+          heroku_email: "nell.dragneel@gmail.com"
+          usedocker: true

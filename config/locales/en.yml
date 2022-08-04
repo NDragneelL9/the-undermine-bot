@@ -30,4 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  telegram_webhooks:
+    start:
+      content: |
+        Hello %{first_name}! Today we are going to make some $$$.
+        Choose a server with /setServer
+        Check WoW token price with /token
