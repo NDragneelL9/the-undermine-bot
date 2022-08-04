@@ -25,6 +25,7 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/the_undermine_bot_test"
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_TEST }}
 
     steps:
       - name: Checkout code
@@ -70,7 +71,7 @@ jobs:
 
   deploy:
     if: ${{ github.even_name == 'push' && github.fer == 'refs/heads/main' }}
-    needs: test
+    needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
