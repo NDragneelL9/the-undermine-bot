@@ -70,7 +70,7 @@ jobs:
         run: bundle exec rubocop --parallel
 
   deploy:
-    if: ${{ github.even_name == 'push' && github.fer == 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
@@ -83,3 +83,11 @@ jobs:
           heroku_app_name: "the-undermine-bot"
           heroku_email: "nell.dragneel@gmail.com"
           usedocker: true
+          healthcheck: "https://the-undermine-bot.herokuapp.com/health"
+          docker_build_args: |
+            RUBY_VERSION
+            RAILS_ENV
+        env:
+          RUBY_VERSION: 3.0.3
+          RAILS_ENV: production
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}

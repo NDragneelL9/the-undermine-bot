@@ -7,7 +7,7 @@ environment:
 
 compose:
   files:
-    - .dockerdev/compose.yml
+    - docker-compose.yml
   project_name: the-undermine-bot
 
 interaction:
@@ -70,5 +70,5 @@ provision:
   # see https://github.com/docker/compose/issues/9426
   - dip compose down --volumes || true
   - dip compose up -d postgres
-  - dip bash -c bin/setup
+  - dip bash -c ./bin/setup
   - dip compose up -d bot
