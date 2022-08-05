@@ -10,9 +10,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   # Every update has one of: message, inline_query, chosen_inline_result,
   # callback_query, etc.
   # Define method with the same name to handle this type of update.
-  def message(message)
-    # store_message(message['text'])
-  end
+  # def message(message)
+  #   # store_message(message['text'])
+  # end
 
   # For the following types of updates commonly used params are passed as arguments,
   # full payload object is available with `payload` instance method.
@@ -72,6 +72,6 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def locale_for_update
-    from['language_code'].to_sym if from
+    from['language_code']&.to_sym
   end
 end
