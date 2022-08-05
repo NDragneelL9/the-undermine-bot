@@ -83,10 +83,9 @@ jobs:
           heroku_app_name: "the-undermine-bot"
           heroku_email: "nell.dragneel@gmail.com"
           usedocker: true
-          healthcheck: "https://the-undermine-bot.herokuapp.com/health"
+          docker_heroku_process_type: bot
           docker_build_args: |
             RUBY_VERSION
-            RAILS_ENV
         env:
           RUBY_VERSION: 3.0.3
           RAILS_ENV: production
