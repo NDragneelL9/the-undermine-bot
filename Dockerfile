@@ -1,6 +1,6 @@
 ARG RUBY_VERSION
 
-FROM ruby:$RUBY_VERSION
+FROM ruby:$RUBY_VERSION AS base
 
 ARG PG_MAJOR
 # Common dependencies
@@ -43,13 +43,12 @@ WORKDIR /app
 # Document that we're going to expose port 3000
 EXPOSE 3000
 # Use Bash as the default command
-CMD ["/usr/bin/bash"]
 
 # Then, we define the "development" stage from the base one
 FROM base AS development
 
 ENV RAILS_ENV=development
-
+CMD ["/usr/bin/bash"]
 # The major difference from the base image is that we may have development-only system
 # dependencies (like Vim or graphviz).
 # We extract them into the Aptfile.dev file.
