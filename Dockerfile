@@ -143,6 +143,6 @@ COPY --chown=my_user:my_user . .
 # 1) Installed gems
 COPY --from=production-builder $BUNDLE_PATH $BUNDLE_PATH
 # 2) We can even copy the Bootsnap cache to speed up our Rails server load!
-COPY --chown=my_user:my_user --from=production-builder /home/my_user/app/tmp/cache/bootsnap* /home/my_user/app/tmp/cache/
+# COPY --chown=my_user:my_user --from=production-builder /home/my_user/app/tmp/cache/bootsnap* /home/my_user/app/tmp/cache/
 
 CMD ["bundle", "exec", "rails", "telegram:bot:poller"]
