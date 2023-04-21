@@ -34,7 +34,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1.113.2
         with:
-          ruby-version: 3.0.3
+          ruby-version: 3.1.2
           bundler-cache: true
 
       - name: Set up database schema
@@ -87,6 +87,6 @@ jobs:
           docker_build_args: |
             RUBY_VERSION
         env:
-          RUBY_VERSION: 3.0.3
+          RUBY_VERSION: 3.1.2
           RAILS_ENV: production
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}

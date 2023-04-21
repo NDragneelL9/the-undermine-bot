@@ -4,7 +4,7 @@ x-app:
     context: .
     dockerfile: ./Dockerfile
     args:
-      RUBY_VERSION: '3.0.3'
+      RUBY_VERSION: '3.1.2'
       PG_MAJOR: '12'
   image: the-undermine-bot:1.0.0
   environment:
