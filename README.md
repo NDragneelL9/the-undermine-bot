@@ -1,7 +1,8 @@
 [![The-Undermine-Bot.jpg](https://i.postimg.cc/Kzy0nV4g/The-Undermine-Bot.jpg)](https://postimg.cc/qtjcr1sk) <br>
-# The Undermine Bot
+# The Undermine Bot (ABANDONED)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/NDragneelL9/the-undermine-bot/blob/main/LICENSE) [![Maintainability](https://api.codeclimate.com/v1/badges/1f1bd3da8f1a9d0de489/maintainability)](https://codeclimate.com/github/NDragneelL9/the-undermine-bot/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1f1bd3da8f1a9d0de489/test_coverage)](https://codeclimate.com/github/NDragneelL9/the-undermine-bot/test_coverage)  <br>
 **Author**: [Tim](https://github.com/NDragneelL9) <br>
+*Abandoned due to returning of WoW Companion App* <br>
 
 ## Table of content
 
